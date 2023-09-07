@@ -1,6 +1,15 @@
 # Ölands Köksmejeri 
 
+Ölands Köksmejeri, ett företag specialiserat på osttillverkning, strävar efter att optimera sina processer genom att implementera automatisering. Detta inkluderar schemaläggning av pastörisering under lågkostnadsperioder, programmering av olika ostrecept och inkorporering av larm i grytan för att övervaka avgörande värden som temperatur, tid och pH. För att säkerställa högkvalitativ produktion, strävar företaget efter att låta potten skicka loggdata till en databas, vilket möjliggör sömlös batchinformationshämtning och erbjuder flexibilitet i valet av databas och dess presentation.
 
+* [Ölands Köksmejeri](#ölands-köksmejeri)
+   * [Mål](#mål)
+   * [Arkitektur](#arkitektur)
+   * [Hårdvara](#hårdvara)
+   * [Node-Red](#node-red)
+      * [PLC Code](#plc-code)
+
+      
 ## Mål
 - Autamtisera flödet så att man kan schemalägga pastörisering som är väldigt tidsödande till nattetid när strömmen är billig. 
 - Programmera hela recept på olika ystningar.
@@ -8,7 +17,7 @@
 - Få grytan att skicka loggdata till databas för att kunna knyta ihop all info om varje batch. Val av databas/presentation.
 
 ## Arkitektur
-![](https://hackmd.io/_uploads/ry9WGLz6h.png)
+![Alt text](/images/image.png)
 
 
 ## Hårdvara 
@@ -42,82 +51,75 @@
 ### PLC Code 
 
 ```cpp
-/*
-   Copyright (c) 2018 Boot&Work Corp., S.L. All rights reserved
-
-   This program is free software: you can redistribute it and/or modify
-   it under the terms of the GNU Lesser General Public License as published by
-   the Free Software Foundation, either version 3 of the License, or
-   (at your option) any later version.
-
-   This program is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-   GNU Lesser General Public License for more details.
-
-   You should have received a copy of the GNU Lesser General Public License
-   along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-
-#include <Ethernet.h>
 #include <ModbusTCPSlave.h>
-
-// Ethernet configuration values
-uint8_t mac[] = { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xEE };
-IPAddress ip(192, 168, 1, 170);
-const uint16_t port = 502;
-
-// Modbus registers mapping
-// This example uses the M-Duino21+ mapping
-int digitalOutputsPins[] = {
-  R0_1, R0_2, R0_3, R0_4, R0_5, R0_6, R0_7, R0_8, R1_1, R1_2, R1_3, R1_4, R1_5, R1_6, R1_7, R1_8
-};
+#include "PLC.h"
+#include "Constants.h"
+#include "Holding.h"
+#include "Input.h"
 
 
-#define numDigitalOutputs int(sizeof(digitalOutputsPins) / sizeof(int))
-#define numAnalogOutputs int(20)
+byte mac[] = {0x84, 0x42, 0x8B, 0xBA, 0xB2, 0x31};
 
-bool digitalOutputs[numDigitalOutputs];
-uint16_t analogOutputs[numAnalogOutputs];
+IPAddress ip(192, 168, 50, 220);
 
-// Define the ModbusTCPSlave object
-ModbusTCPSlave modbus(port);
+ModbusTCPSlave slave;
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
+Holding holdingRegisters;
+Input inputRegisters;
+PLC plc;
+
+String strBuffer = "";
+
 void setup() {
-  Serial.begin(9600UL);
+  Serial.begin(115200);
 
-  // Init variables, inputs and outputs
-  for (int i = 0; i < numDigitalOutputs; ++i) {
-    digitalOutputs[i] = false;
-    digitalWrite(digitalOutputsPins[i], digitalOutputs[i]);
-  }
-
-  // Init Ethernet
+  // Init the Ethernet
   Ethernet.begin(mac, ip);
   Serial.println(Ethernet.localIP());
 
-  // Init ModbusTCPSlave object
-  modbus.begin();
 
-  modbus.setCoils(digitalOutputs, numDigitalOutputs);
-  modbus.setHoldingRegisters(analogOutputs, numAnalogOutputs);
+  slave.setHoldingRegisters(holdingRegisters.m, holdingRegisters.m.size());
+  slave.setInputRegisters(inputRegisters, inputRegisters.size());
+
+  // Init the ModbusTCPSlave object
+  slave.begin();
+
+  // Set all relay pins to output
+  pinMode(R0_1, OUTPUT);
+  pinMode(R0_2, OUTPUT);
+  pinMode(R0_3, OUTPUT);
+  pinMode(R0_4, OUTPUT);
+  pinMode(R0_5, OUTPUT);
+  pinMode(R0_6, OUTPUT);
+  pinMode(R0_7, OUTPUT);
+  pinMode(R0_8, OUTPUT);
+
+  pinMode(R1_1, OUTPUT);
+  pinMode(R1_2, OUTPUT);
+  pinMode(R1_3, OUTPUT);
+  pinMode(R1_4, OUTPUT);
+  pinMode(R1_5, OUTPUT);
+  pinMode(R1_6, OUTPUT);
+  pinMode(R1_7, OUTPUT);
+  pinMode(R1_8, OUTPUT);
+  
 }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
+
 void loop() {
+  const float time = millis();
 
-  // Process modbus requests
-  modbus.update();
+  // Temporary code to read user input from serial monitor
+  if (Serial.available()) {
+    strBuffer = Serial.readString();
+    // strBuffer.trim();
+    Serial.println("User input was: " + strBuffer);
+  }
 
-  // Update outputs
-  for (int i = 0; i < numDigitalOutputs; ++i) {
-    digitalWrite(digitalOutputsPins[i], digitalOutputs[i]);
-  }
-  for (int i = 0; i < numAnalogOutputs; ++i) {
-    Serial.print(analogOutputs[i]);
-    Serial.print(" ");
-  }
-  Serial.println();
+
+  slave.update();
+
+  // now we have all the input and holding registers do run the control logic
+  int status = plc.doControlLogic(inputRegisters, holdingRegisters, millis());
 }
 ```
