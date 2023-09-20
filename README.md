@@ -8,6 +8,7 @@
    * [Hårdvara](#hårdvara)
    * [Node-Red](#node-red)
       * [PLC Code](#plc-code)
+   * [Länkar](#länkar)
 
       
 ## Mål
@@ -123,3 +124,10 @@ void loop() {
   int status = plc.doControlLogic(inputRegisters, holdingRegisters, millis());
 }
 ```
+
+
+## Länkar
+- PT100 transmitter datasheet - https://www.deltaacdrives.com/Delta-DTC-User-Manual.pdf
+- VFD datasheet - http://www.realimpeks.co.rs/download/delta_vfd_el.pdf 
+- Flowmeter - https://wiki.seeedstudio.com/G1_Water_Flow_Sensor/
+- PLC datasheet - https://www.industrialshields.com/web/content/513741 
