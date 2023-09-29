@@ -11,12 +11,15 @@ Below is a summary of [Sensor informmation](https://components101.com/sensors/yf
 |720|90.2|
 
 ![Graph of flow VS frequency](../images/Flow_Frequency.png)
+Green line: Freqiency = Flow x 7.5
+
+Orange line: Freqiency = Flow x 7.5
 ## Water through sensor using a funnel
 
 
 | Water poured (L) | Water measured (L) | Pulse flow formula     |
 |------------------|--------------------|------------------------|
 | 0.75             | 0.63               | Freqiency = Flow x 7.5 |
-| 0.75             | 0.5                 | Freqiency = Flow x 8.2 |
+| 0.75             | 0.5                | Freqiency = Flow x 8.2 |
 
 Funnel is to big and water can't be poured without spilling
