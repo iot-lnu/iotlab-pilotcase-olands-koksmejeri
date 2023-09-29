@@ -3,7 +3,7 @@
 volatile int pulseCount;
 volatile float totalWaterAmount;
 int hallsensor = 13;
-int pulseFlowKoefficient = 7.5;
+int pulseFlowKoefficient = 8.2;
 
 // put function declarations here:
 void increasePulseCount() {
