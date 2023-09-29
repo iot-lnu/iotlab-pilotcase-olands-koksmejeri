@@ -23,3 +23,7 @@ Orange line: Freqiency = Flow x 7.5
 | 0.75             | 0.5                | Freqiency = Flow x 8.2 |
 
 Funnel is to big and water can't be poured without spilling
+
+## Test with hose
+
+The sensor was attatched to a hose. Around 25 L of water was poured. Sensor reported 20.58 L.
