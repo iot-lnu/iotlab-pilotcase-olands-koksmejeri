@@ -10,7 +10,7 @@ Below is a summary of [Sensor informmation](https://components101.com/sensors/yf
 |600|82|
 |720|90.2|
 
-
+![Graph of flow VS frequency](../images/Flow_Frequency.png)
 ## Water through sensor using a funnel
 
 
