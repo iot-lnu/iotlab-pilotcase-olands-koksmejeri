@@ -38,7 +38,11 @@ float getCurrentFlow() {
 }
 
 void increaseTotalWaterAmount() {
-  totalWaterAmount += getCurrentFlow() * weightFromTests * delayTimeMinutes;
+  totalWaterAmount += getCurrentFlow() * delayTimeMinutes;
+}
+
+float getWeightedTotalAmount() {
+  return totalWaterAmount * weightFromTests;
 }
 
 void loop() {
@@ -51,5 +55,7 @@ void loop() {
   // Serial.print(getCurrentFlow());
   // Serial.print(" L/M is the current water flow\n");
   Serial.print(totalWaterAmount);
-  Serial.print(" L is the total amount of water\n");
+  Serial.print(" L is the total amount of water according to sensor\n");
+   Serial.print(getWeightedTotalAmount());
+  Serial.print(" L is the total amount of water weighted according to tests\n");
 }
