@@ -58,6 +58,10 @@ while measuring I am holding the meater and the hose together with my hand. A lo
 
 ### Several tests with larger volumes of water
 
+For these tests, exept for pouring more water each test, a hose is attatched to the sensor using an adapter. This could also affect the consitancy of the results. 
+
+![image depicting microchip and flow meater attatched with adapter](../images/garden_setup.png)
+
 | Water weight (kg) | Water YF-S201 (L) | YF-S201/weighed |
 |-------------------|--------------------|--------------------------------|
 | 9.4               | 8.68               | 0.9234                         |
@@ -74,3 +78,5 @@ while measuring I am holding the meater and the hose together with my hand. A lo
 | Mean YF-S201/weighed | Standard deviation YF-S201/weighed |
 |------|--------------------|
 |0.93432  | 0.016152317     |
+
+For larger volumes of water, the STD is a lot smaller
