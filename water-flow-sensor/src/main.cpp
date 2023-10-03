@@ -29,7 +29,7 @@ float getCurrentFlow() {
 }
 
 void increaseTotalWaterAmount() {
-  totalWaterAmount += getCurrentFlow()/60;
+  totalWaterAmount += getCurrentFlow()*testWeight/60;
 }
 
 void loop() {
