@@ -3,10 +3,18 @@
 volatile int pulseCount;
 volatile float totalWaterAmount;
 int hallsensor = 13;
-float pulseFlowKoefficient = 7;
-float testWeight = 1.0753;
 
-// put function declarations here:
+int delayTimeMicroSeconds = 1000;
+float delayTimeMinutes = delayTimeMicroSeconds/60000;
+
+// This number is used to turn the pulse frequency in to a waterflow
+float pulseFlowKoefficient = 7;
+
+// This nober is used to adjust the final results so they correspond with reality.
+// It was found by comparing how much water was actually pured to how much was 
+// poured according to the program.
+float weightFromTests = 1.0753;
+
 void increasePulseCount() {
   pulseCount ++;
 }
@@ -29,13 +37,13 @@ float getCurrentFlow() {
 }
 
 void increaseTotalWaterAmount() {
-  totalWaterAmount += getCurrentFlow()*testWeight/60;
+  totalWaterAmount += getCurrentFlow() * weightFromTests * delayTimeMinutes;
 }
 
 void loop() {
   pulseCount = 0;
   sei();
-  delay(1000);
+  delay(delayTimeMicroSeconds);
   cli();
   increaseTotalWaterAmount();
   // Serial.print(getCurrentFlow()/60);
