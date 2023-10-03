@@ -53,3 +53,5 @@ doing several tests to see cositancy. The fact that Im pumping a very small amou
 
 
 while measuring I am holding the meater and the hose together with my hand. A lot can vary between each test, this could affect the dramatic difference between results.
+
+[image depicting how flow meater was held during test](../images/sink_setup.jpg)
