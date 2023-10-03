@@ -5,7 +5,8 @@ volatile float totalWaterAmount;
 int hallsensor = 13;
 
 int delayTimeMicroSeconds = 1000;
-float delayTimeMinutes = delayTimeMicroSeconds/60000;
+float delayTimeSeconds = delayTimeMicroSeconds/1000;
+float delayTimeMinutes = delayTimeSeconds/60;
 
 // This number is used to turn the pulse frequency in to a waterflow
 float pulseFlowKoefficient = 7;
@@ -33,7 +34,7 @@ void setup() {
 
 // Function returns the current flow in liters/minute:
 float getCurrentFlow() {
-  return pulseCount/pulseFlowKoefficient;
+  return pulseCount / (pulseFlowKoefficient * delayTimeSeconds);
 }
 
 void increaseTotalWaterAmount() {
