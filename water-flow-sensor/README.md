@@ -79,4 +79,4 @@ For these tests, exept for pouring more water each test, a hose is attatched to 
 |------|--------------------|
 |0.93432  | 0.016152317     |
 
-For larger volumes of water, the STD is a lot smaller
+For larger volumes of water, the STD is a lot smaller. The measured values vary more than one STD from the expected value, this indicates that adjustments to the code could make the results of the measurements better.
