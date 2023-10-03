@@ -19,19 +19,22 @@ Orange line: Freqiency = Flow x 7.5
 
 | Water poured (L) | Water measured (L) | Pulse flow formula     |
 |------------------|--------------------|------------------------|
-| 0.75             | 0.63               | Freqiency = Flow x 7.5 |
-| 0.75             | 0.5                | Freqiency = Flow x 8.2 |
+| 0.75             | 0.63               | Freqiency = Flow x 7 |
+| 0.75             | 0.5                | Freqiency = Flow x 8 |
 
 Funnel is to big and water can't be poured without spilling
 
 ## Test with hose
 
-Freqiency = Flow x 8.2. Measure pulse s for 1 s at a time. The sensor was attatched to a hose. Around 25 L of water was poured. Sensor reported 20.58 L.
+Freqiency = Flow x 8. Measure pulse s for 1 s at a time. The sensor was attatched to a hose. Around 25 L of water was poured. Sensor reported 20.58 L.
 
-###  Freqiency = Flow x 7.5
+###  Freqiency = Flow x 7
 
-This is the recomended value according to google. If 7.5 was used in the previous test, the ressult would have been 20.58 x 8.2/7.5 = 22.5
-doing several tests to see cositancy. The fact that Im pumping a very small amount each try could throw the ressults off.
+7.5 is the recomended value according to google, due to a misstake were I used "int" instead of "float" we use the value 7.
+doing several tests to see cositancy. The fact that Im pumping a very small amount each try could throw the ressults off, everything is more inconsistant in the begining and end of each pour.
+while measuring I am holding the meater and the hose together with my hand. A lot can vary between each test, this could affect the dramatic difference between results.
+
+![image depicting how flow meater was held during test](../images/sink_setup.png)
 
 | Water poured (L) | Water YF-S201 (L) | YF-S201/poured |
 |------------------|--------------------|------------------------|
@@ -50,13 +53,7 @@ doing several tests to see cositancy. The fact that Im pumping a very small amou
 |------|--------------------|
 |0.9508  | 0.45               |
 
-
-
-while measuring I am holding the meater and the hose together with my hand. A lot can vary between each test, this could affect the dramatic difference between results.
-
-![image depicting how flow meater was held during test](../images/sink_setup.png)
-
-### Several tests with larger volumes of water
+#### Several tests with larger volumes of water
 
 For these tests, exept for pouring more water each test, a hose is attatched to the sensor using an adapter. This could also affect the consitancy of the results. 
 
@@ -79,4 +76,8 @@ For these tests, exept for pouring more water each test, a hose is attatched to 
 |------|--------------------|
 |0.93432  | 0.016152317     |
 
-For larger volumes of water, the STD is a lot smaller. The measured values vary more than one STD from the expected value, this indicates that adjustments to the code could make the results of the measurements better.
+For larger volumes of water, the STD is a lot smaller. The measured values deviate more than one STD from the expected value, this indicates that adjustments to the code could make the results of the measurements better.
+
+#### Weighthed results
+
+For this attempt, the measurements are weighted according to the results from the previous test. The mean value of the measurements for 1 liter of water was 0.93432 so the results will be weighed with a factor of 1/0.93432 = 1.0753
