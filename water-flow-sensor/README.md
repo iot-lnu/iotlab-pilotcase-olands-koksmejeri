@@ -31,7 +31,7 @@ Frequency = Flow x 8. Measure pulse s for 1 s at a time. The sensor was attatche
 ###  Frequency = Flow x 7
 
 7.5 is the recomended value according to google, due to a misstake were I used "int" instead of "float" we use the value 7.
-doing several tests to see cositancy. The fact that Im pumping a very small amount each try could throw the ressults off, everything is more inconsistant in the begining and end of each pour.
+doing several tests to see cositancy. The fact that Im pumping a very small amount each try could throw the ressults off, I assume the flow is more inconsistant in the begining and end of each pour.
 while measuring I am holding the meater and the hose together with my hand. A lot can vary between each test, this could affect the dramatic difference between results.
 
 ![image depicting how flow meater was held during test](../images/sink_setup.png)
