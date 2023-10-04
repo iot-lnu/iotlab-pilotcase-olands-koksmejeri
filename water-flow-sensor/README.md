@@ -85,3 +85,5 @@ For this attempt, the measurements are weighted according to the results from th
 ## Attempt with vacume cleaner
 
 The sensor is attatched to a vacuumecleaner using a 3D printed adapter designed by Arthur Courant. Unfourtionetley the vacume was to strong for the sensor.
+
+![3D-pronted vacume adapter](../images/vacume_adapter.jpg)
