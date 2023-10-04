@@ -52,10 +52,11 @@ void loop() {
   cli();
   increaseTotalWaterAmount();
   // Serial.print(getCurrentFlow()/60);
-  // Serial.print(getCurrentFlow());
+  Serial.print(getCurrentFlow());
+  Serial.print(", ");
   // Serial.print(" L/M is the current water flow\n");
-  Serial.print(totalWaterAmount);
-  Serial.print(" L is the total amount of water according to sensor\n");
-   Serial.print(getWeightedTotalAmount());
-  Serial.print(" L is the total amount of water weighted according to tests\n");
+  // Serial.print(totalWaterAmount);
+  // Serial.print(" L is the total amount of water according to sensor\n");
+  // Serial.print(getWeightedTotalAmount());
+  // Serial.print(" L is the total amount of water weighted according to tests\n");
 }

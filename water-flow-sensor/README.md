@@ -81,3 +81,7 @@ For larger volumes of water, the STD is a lot smaller. The measured values devia
 #### Weighthed results
 
 For this attempt, the measurements are weighted according to the results from the previous test. The mean value of the measurements for 1 liter of water was 0.93432 so the results will be weighed with a factor of 1/0.93432 = 1.0753
+
+## Attempt with vacume cleaner
+
+The sensor is attatched to a vacuumecleaner using a 3D printed adapter designed by Arthur Courant. Unfourtionetley the vacume was to strong for the sensor.
