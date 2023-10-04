@@ -11,24 +11,24 @@ Below is a summary of [Sensor informmation](https://components101.com/sensors/yf
 |720|90.2|
 
 ![Graph of flow VS frequency](../images/Flow_Frequency.png)
-Green line: Freqiency = Flow x 8.2
+Green line: Frequency = Flow x 8.2
 
-Orange line: Freqiency = Flow x 7.5
+Orange line: Frequency = Flow x 7.5
 ## Water through sensor using a funnel
 
 
 | Water poured (L) | Water measured (L) | Pulse flow formula     |
 |------------------|--------------------|------------------------|
-| 0.75             | 0.63               | Freqiency = Flow x 7 |
-| 0.75             | 0.5                | Freqiency = Flow x 8 |
+| 0.75             | 0.63               | Frequency = Flow x 7 |
+| 0.75             | 0.5                | Frequency = Flow x 8 |
 
 Funnel is to big and water can't be poured without spilling
 
 ## Test with hose
 
-Freqiency = Flow x 8. Measure pulse s for 1 s at a time. The sensor was attatched to a hose. Around 25 L of water was poured. Sensor reported 20.58 L.
+Frequency = Flow x 8. Measure pulse s for 1 s at a time. The sensor was attatched to a hose. Around 25 L of water was poured. Sensor reported 20.58 L.
 
-###  Freqiency = Flow x 7
+###  Frequency = Flow x 7
 
 7.5 is the recomended value according to google, due to a misstake were I used "int" instead of "float" we use the value 7.
 doing several tests to see cositancy. The fact that Im pumping a very small amount each try could throw the ressults off, everything is more inconsistant in the begining and end of each pour.
