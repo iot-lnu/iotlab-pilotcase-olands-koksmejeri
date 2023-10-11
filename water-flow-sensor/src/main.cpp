@@ -4,7 +4,7 @@ volatile int pulseCount;
 volatile float totalWaterAmount;
 int hallsensor = 13;
 
-int delayTimeMicroSeconds = 1000;
+int delayTimeMicroSeconds = 10000;
 float delayTimeSeconds = delayTimeMicroSeconds/1000;
 float delayTimeMinutes = delayTimeSeconds/60;
 
@@ -55,7 +55,7 @@ void loop() {
   // Serial.print(getCurrentFlow());
   // Serial.print(", ");
   // Serial.print(" L/M is the current water flow\n");
-  Serial.print(getWeightedTotalAmount());
+  Serial.print(totalWaterAmount);
   Serial.print(" L is the total amount of water according to sensor\n");
   // Serial.print(getWeightedTotalAmount());
   // Serial.print(" L is the total amount of water weighted according to tests\n");

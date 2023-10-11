@@ -81,7 +81,11 @@ For larger volumes of water, the STD is a lot smaller. The measured values devia
 #### Weighthed results
 
 For this attempt, the measurements are weighted according to the results from the previous test. The mean value of the measurements for 1 liter of water was 0.93432 so the results will be weighed with a factor of 1/0.93432 = 1.0753
-Five volumes of water are measured. It seams like the factor is to large. The setup is slightley different from the previous test, this could explain the difference. These results could be a hint that individual allibrations are needed for each new setup. The STD for these test runs is 1.5 % of the mean, for the previous test it was 1.7 %. We cant say if this has an explanation, or if its coincidence. The way this test is set up, the hose and the meater are manipulated less between tests, this could be a reason to expect a smaller standard deviation.   
+Five volumes of water are measured. It seams like the factor is to large.
+
+![Image depicting how hose and flowmeater was arranged during tests](../images/garden_setup_2.jpg)
+
+The setup is slightley different from the previous test, this could explain the difference. These results could be a hint that individual allibrations are needed for each new setup. The STD for these test runs is 1.5 % of the mean, for the previous test it was 1.7 %. We cant say if this has an explanation, or if its coincidence. The way this test is set up, the hose and the meater are manipulated less between tests, this could be a reason to expect a smaller standard deviation.   
 
 | Water weight (kg) | Water measured (L) | Water(measured)/Water(weighed) |
 |-------------------|--------------------|--------------------------------|
@@ -95,8 +99,51 @@ Five volumes of water are measured. It seams like the factor is to large. The se
 | Mean YF-S201/weighed | Standard deviation YF-S201/weighed | STD/mean|
 |------|--------------------|----------|
 |1.039  | 0.01554027   | 0.01495694898 |
+
+#### Testing longer times of measuring pulses
+
+waitingTimeMS = 10000
+
+No weight on ressults
+
+| Water weight (kg) | Water measured (L) | Water(measured)/Water(weighed) |
+|-------------------|--------------------|--------------------------------|
+| 9.9               | 9.39               | 0.9485                         |
+| 7.8               | 7.55               | 0.9679                         |
+| 9.1               | 8.78               | 0.9648                         |
+| 8.4               | 8.16               | 0.9714                         |
+| 9.0               | 8.73               | 0.97                           |
+| 8.6               | 8.34               | 0.9698                         |
+| 10.2              | 9.90               | 0.9706                         |
+| 9.1               | 8.83               | 0.9703                         |
+| 9.5               | 9.19               | 0.9674                         |
+| 9.5               | 9.14               | 0.9621                         |
+
+| Mean YF-S201/weighed | Standard deviation YF-S201/weighed | STD/mean|
+|------|--------------------|----------|
+|0.96628  | 0.0068874766   | 0.00712782692 |
+
+To be able to know if this is because of the time adjustment, or the new setup, unweighted values from the previous test are calculated
+
+| Water weight (kg) | Water measured (L) | Water(measured)/Water(weighed) |
+|-------------------|--------------------|--------------------------------|
+| 8,6               | 8.29               | 0.96                           |
+| 8.6               | 8.1                | 0.94                           |
+| 9.5               | 9.23               | 0.97                           |
+| 9.9               | 9.64               | 0.97                           |
+| 9.9               | 9.69               | 0.98                           |
+
+| Mean YF-S201/weighed | Standard deviation YF-S201/weighed | STD/mean|
+|------|--------------------|----------|
+|0.964  | 0.015165751   | 0.01573210684 |
+
+comparing to previous test with similar setup shows that increasing the time for measuring pulses does not seam to affect how close the ressults are to the expacted values, it does however seam to increase the precission of the ressults, as the standard deviation was halved. These ressults could be explained by the fact that there are fewer measurements in one of the test, so a single outlier will affect the STD more. 
+
 ## Attempt with vacume cleaner
 
 The sensor is attatched to a vacuumecleaner using a 3D printed adapter designed by Arthur Courant. Unfourtionetley the vacume was to strong for the sensor.
 
 ![3D-printed vacume adapter](../images/vacume_adapter.jpg)
+
+0.9485, 0.9679, 0.9648, 0.9714, 0.97, 0.9698, 0.9706, 0.9703, 0.9674, 0.9621
+0.96, 0.94, 0.97, 0.97, 0.98
