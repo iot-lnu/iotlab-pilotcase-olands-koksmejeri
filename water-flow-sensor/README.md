@@ -72,18 +72,31 @@ For these tests, exept for pouring more water each test, a hose is attatched to 
 | 10.2              | 9.65               | 0.9461                         |
 | 10.2              | 9.38               | 0.8933                         |
 
-| Mean YF-S201/weighed | Standard deviation YF-S201/weighed |
-|------|--------------------|
-|0.93432  | 0.016152317     |
+| Mean YF-S201/weighed | Standard deviation YF-S201/weighed | STD/mean|
+|------|--------------------|-----------|
+|0.93432  | 0.016152317     | 0.01728777827 |
 
 For larger volumes of water, the STD is a lot smaller. The measured values deviate more than one STD from the expected value, this indicates that adjustments to the code could make the results of the measurements better.
 
 #### Weighthed results
 
 For this attempt, the measurements are weighted according to the results from the previous test. The mean value of the measurements for 1 liter of water was 0.93432 so the results will be weighed with a factor of 1/0.93432 = 1.0753
+Five volumes of water are measured. It seams like the factor is to large. The setup is slightley different from the previous test, this could explain the difference. These results could be a hint that individual allibrations are needed for each new setup. The STD for these test runs is 1.5 % of the mean, for the previous test it was 1.7 %. We cant say if this has an explanation, or if its coincidence. The way this test is set up, the hose and the meater are manipulated less between tests, this could be a reason to expect a smaller standard deviation.   
 
+| Water weight (kg) | Water measured (L) | Water(measured)/Water(weighed) |
+|-------------------|--------------------|--------------------------------|
+| 8,6               | 8.92               | 1.037                          |
+| 8.6               | 8.71               | 1.013                          |
+| 9.5               | 9.93               | 1.045                          |
+| 9.9               | 10.37              | 1.048                          |
+| 9.9               | 10.42              | 1.052                          |
+
+
+| Mean YF-S201/weighed | Standard deviation YF-S201/weighed | STD/mean|
+|------|--------------------|----------|
+|1.039  | 0.01554027   | 0.01495694898 |
 ## Attempt with vacume cleaner
 
 The sensor is attatched to a vacuumecleaner using a 3D printed adapter designed by Arthur Courant. Unfourtionetley the vacume was to strong for the sensor.
 
-![3D-pronted vacume adapter](../images/vacume_adapter.jpg)
+![3D-printed vacume adapter](../images/vacume_adapter.jpg)
