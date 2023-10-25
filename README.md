@@ -64,86 +64,56 @@ Uppställning försök 1                           | Uppställning försök 2   
 
 Det första försöket har den största standardavvikelsen, detta skulle kunna förklaras av hur man hanterade givaren och slangen mellan mätningar, men också av att man mätte upp små mängder vätska i detta försök. Det verkar som att resultatet påverkas av hur givaren och slangen/röret sitter ihop, samt hur de är placerade i förhålllande till varandera, detta kan vara anledningen till att medelvärdet varierar mellan olika försök, samt att standardavvikelsen verkar bli mindre ju mindre man rör slangen och givaren mellan mätningarna i samma försök. Detta indikerar att sensorn behöver kalibreras varje gång den installeras på ett nytt ställe. Enligt dessa tester verkar det som att en längre tid för att mäta pulser gör standardavvikelsen mindre, dock måste man komma ihåg att det gjordes hälften så många mätningar vid försöket där pulserna räknas under kortare tid med samma uppställning av utrustningen. Har det råkat komma med ett avvikande värde i försöket med kortare pulsräkningstid, så kan detta ha stor påverkan på standardavvikelsen. Se [water-flow-sensor](/water-flow-sensor/) för att läsa mer om testerna som utförts. det verkar som att det går att mäta upp en mängd vatten med en felmarginal som är mindre än 10%. 
 
+## Mjukvara 
+
+Tillståndsmaskinen nedan visar vilka tillstånd PLC har. 
+
+![Alt text](<olands_statem .png>)
+
+## Modbus 
+### Input Registers
+| Register | Description | Measurement Units | Type | Implemented |
+| --- | --- | --- | --- | --- |
+| 0 | Current State | - | uint16_t | Yes |
+| 1 | Time Left | - | uint16_t | Yes |
+| 2 | Temperature | Celsius | float | No |
+| 3 | Flow | LPM | float | No |
+| 4 | Liters in Mantle | Liters | float | No |
+
+
+### Holding Registers
+| Register | Description | Units | Type | Implemented |
+| --- | --- | --- | --- | --- |
+| 0 | Start or stop | on/off (0 or 1) | uint16_t | Yes |
+| 1 | State the PLC should be put into prior to starting | See states table below | uint16_t | Yes |
+| 2 | Fill water duration | Minutes | uint16_t | Yes |
+| 3 | Set water volume | Liters | uint16_t | No |
+| 4 | Stirring speed | RPM | uint16_t | No |
+| 5 | Set heating temperature | Celsius | uint16_t | Yes |
+| 6 | Set cooling temperature | Celsius | uint16_t | No |
+| 7 | Hold temperature duration | Minutes | uint16_t | Yes |
+| 8 | Register C | - | uint16_t | No |
+| 9 | Register D | - | uint16_t | No |
+| 10 | Register E | - | uint16_t | No |
+| 11 | Register F | - | uint16_t | No |
+| 12 | Register G | - | uint16_t | No |
+| 13 | Register H | - | uint16_t | No |
+| 14 | Register I | - | uint16_t | No |
+| 15 | Register J |- | uint16_t | No |
+| 16 | Register K | - | uint16_t | No |
+| 17 | Register L | - | uint16_t | No |
+| 18 | Register M (End of pasteurization setting) | - | uint16_t | No |
+
+| State | Number | Description |
+| --- | --- | --- |
+| Idle state | 1 | The system is not active and waiting for an action. LED: constant green LED |
+| Fill water state | 2 | The system is in the process of filling water. LED: blinking green LED|
+| Pasteurization state | 3 | The system is in pasteurization process. LED: constant yellow LED |
+| Error state | 99 | The system is in Error State. LED: constant red LED |
+
 ## Node-Red
 
 ![](https://hackmd.io/_uploads/SJkabkrp3.png)
-
-
-### PLC Code 
-
-```cpp
-#include <ModbusTCPSlave.h>
-#include "PLC.h"
-#include "Constants.h"
-#include "Holding.h"
-#include "Input.h"
-
-
-byte mac[] = {0x84, 0x42, 0x8B, 0xBA, 0xB2, 0x31};
-
-IPAddress ip(192, 168, 50, 220);
-
-ModbusTCPSlave slave;
-
-Holding holdingRegisters;
-Input inputRegisters;
-PLC plc;
-
-String strBuffer = "";
-
-void setup() {
-  Serial.begin(115200);
-
-  // Init the Ethernet
-  Ethernet.begin(mac, ip);
-  Serial.println(Ethernet.localIP());
-
-
-  slave.setHoldingRegisters(holdingRegisters.m, holdingRegisters.m.size());
-  slave.setInputRegisters(inputRegisters, inputRegisters.size());
-
-  // Init the ModbusTCPSlave object
-  slave.begin();
-
-  // Set all relay pins to output
-  pinMode(R0_1, OUTPUT);
-  pinMode(R0_2, OUTPUT);
-  pinMode(R0_3, OUTPUT);
-  pinMode(R0_4, OUTPUT);
-  pinMode(R0_5, OUTPUT);
-  pinMode(R0_6, OUTPUT);
-  pinMode(R0_7, OUTPUT);
-  pinMode(R0_8, OUTPUT);
-
-  pinMode(R1_1, OUTPUT);
-  pinMode(R1_2, OUTPUT);
-  pinMode(R1_3, OUTPUT);
-  pinMode(R1_4, OUTPUT);
-  pinMode(R1_5, OUTPUT);
-  pinMode(R1_6, OUTPUT);
-  pinMode(R1_7, OUTPUT);
-  pinMode(R1_8, OUTPUT);
-  
-}
-
-
-void loop() {
-  const float time = millis();
-
-  // Temporary code to read user input from serial monitor
-  if (Serial.available()) {
-    strBuffer = Serial.readString();
-    // strBuffer.trim();
-    Serial.println("User input was: " + strBuffer);
-  }
-
-
-  slave.update();
-
-  // now we have all the input and holding registers do run the control logic
-  int status = plc.doControlLogic(inputRegisters, holdingRegisters, millis());
-}
-```
 
 
 ## Länkar
