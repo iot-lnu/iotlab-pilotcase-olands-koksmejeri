@@ -68,8 +68,8 @@ Det första försöket har den största standardavvikelsen, detta skulle kunna f
 
 Tillståndsmaskinen nedan visar vilka tillstånd PLC har. 
 
-![Alt text](<olands_statem .png>)
-
+![Alt text](/images/olands_statem.png)
+ 
 ## Modbus 
 ### Input Registers
 | Register | Description | Measurement Units | Type | Implemented |
